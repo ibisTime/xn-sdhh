@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- <settings>
+		<setting name="logImpl" value="STDOUT_LOGGING"/>
+	</settings> -->
+	<typeAliases>		
+		<typeAlias alias="sysMenu" type="com.xn.sdhh.domain.SYSMenu" />
+	    <typeAlias alias="sysRole" type="com.xn.sdhh.domain.SYSRole" />
+ 	    <typeAlias alias="sysMenuRole" type="com.xn.sdhh.domain.SYSMenuRole" />
+	    <typeAlias alias="sysDict" type="com.xn.sdhh.domain.SYSDict" />
+	    <typeAlias alias="sysConfig" type="com.xn.sdhh.domain.SYSConfig" />
+	   
+		<typeAlias alias="sysuser" type="com.xn.sdhh.domain.SYSUser"/>
+		<typeAlias alias="business" type="com.xn.sdhh.domain.Business"/>		
+	</typeAliases>
+</configuration>	
