@@ -6,7 +6,6 @@ import com.xn.sdhh.bo.base.IPaginableBO;
 import com.xn.sdhh.domain.Business;
 import com.xn.sdhh.dto.req.XN301220Req;
 import com.xn.sdhh.dto.req.XN301222Req;
-import com.xn.sdhh.dto.req.XN301223Req;
 
 public interface IBusinessBO extends IPaginableBO<Business> {
 
@@ -17,10 +16,6 @@ public interface IBusinessBO extends IPaginableBO<Business> {
     public void removeBusiness(Business data);
 
     public void refreshBusiness(Business data, XN301222Req req, Long dzlx,
-            Long fdje, Long pgf, Long bzjdke, Integer fbhrc, Integer fkrc,
-            Integer dyrc, Integer djrc);
-
-    public void refreshStatus(Business data, XN301223Req req, Long dzlx,
             Long fdje, Long pgf, Long bzjdke, Integer fbhrc, Integer fkrc,
             Integer dyrc, Integer djrc);
 

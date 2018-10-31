@@ -9,6 +9,4 @@ public interface IBusinessDAO extends IBaseDAO<Business> {
 
     void update(Business data);
 
-    void updateStatus(Business data);
-
 }

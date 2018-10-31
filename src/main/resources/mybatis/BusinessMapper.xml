@@ -182,46 +182,8 @@
 		,#{status}
 		)
 	</insert>
-
+	
 	<update id="update_business" parameterType="business">
-		UPDATE tsd_business
-		SET
-		qyfzrmc=#{qyfzrmc}
-		,qczl=#{qczl}
-		,khmc=#{khmc}
-		,dkje=#{dkje}
-
-		,zhll=#{zhll}
-		,dkrq=#{dkrq}
-		,yhfkrq=#{yhfkrq}
-		,gshkrq=#{gshkrq}
-		,fbhhsrq=#{fbhhsrq}
-		
-		,fbhrc=#{fbhrc}
-		,wzdzrq=#{wzdzrq}
-		,djrq=#{djrq}
-		,djrc=#{djrc}
-		,terq=#{terq}
-		
-		,fkrc=#{fkrc}
-		,dyrq=#{dyrq}
-		,dyrc=#{dyrc}
-		,fdje=#{fdje}
-		,pgf=#{pgf}
-		
-		,dzlx=#{dzlx}
-		,ysfdje=#{ysfdje}
-		,qdf=#{qdf}
-		,jx=#{jx}
-		,qtlr=#{qtlr}
-		
-		,bzjdke=#{bzjdke}
-		,mlr=#{mlr}
-		WHERE code = #{code}
-	</update>
-	
-	
-	<update id="update_status" parameterType="business">
 		UPDATE tsd_business
 		SET
 		qyfzrmc=#{qyfzrmc}

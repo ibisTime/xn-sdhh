@@ -50,9 +50,4 @@ public class BusinessDAOImpl extends AMybatisTemplate implements IBusinessDAO {
         super.update(NAMESPACE.concat("update_business"), data);
     }
 
-    @Override
-    public void updateStatus(Business data) {
-        super.update(NAMESPACE.concat("update_status"), data);
-    }
-
 }

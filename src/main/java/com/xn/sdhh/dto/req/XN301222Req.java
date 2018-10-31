@@ -8,14 +8,6 @@ public class XN301222Req {
     @NotBlank(message = "编号不能为空")
     private String code;
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     // 区域负责人名称
     private String qyfzrmc;
 
@@ -63,6 +55,14 @@ public class XN301222Req {
 
     // 抵押日期
     private String dyrq;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getQyfzrmc() {
         return qyfzrmc;

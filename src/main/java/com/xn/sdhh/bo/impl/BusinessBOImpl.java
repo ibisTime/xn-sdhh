@@ -16,7 +16,6 @@ import com.xn.sdhh.dao.IBusinessDAO;
 import com.xn.sdhh.domain.Business;
 import com.xn.sdhh.dto.req.XN301220Req;
 import com.xn.sdhh.dto.req.XN301222Req;
-import com.xn.sdhh.dto.req.XN301223Req;
 import com.xn.sdhh.enums.EBusinessStatus;
 import com.xn.sdhh.exception.BizException;
 
@@ -193,76 +192,6 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
     @Override
     public void removeBusiness(Business data) {
         businessDAO.delete(data);
-    }
-
-    @Override
-    public void refreshStatus(Business data, XN301223Req req, Long dzlx,
-            Long fdje, Long pgf, Long bzjdke, Integer fbhrc, Integer fkrc,
-            Integer dyrc, Integer djrc) {
-        data.setQyfzrmc(req.getQyfzrmc());
-        data.setQczl(req.getQczl());
-        data.setKhmc(req.getKhmc());
-        data.setDyrc(dyrc);
-        data.setDkje(StringValidater.toLong(req.getDkje()));
-        data.setZhll(StringValidater.toDouble(req.getZhll()));
-
-        data.setPgf(pgf);
-        data.setQdf(StringValidater.toLong(req.getQdf()));
-        data.setJx(StringValidater.toLong(req.getJx()));
-        data.setQtlr(StringValidater.toLong(req.getQtlr()));
-
-        data.setYhfkrq(DateUtil.strToDate(req.getYhfkrq(),
-            DateUtil.FRONT_DATE_FORMAT_STRING));
-        data.setDkrq(DateUtil.strToDate(req.getDkrq(),
-            DateUtil.FRONT_DATE_FORMAT_STRING));
-        data.setFkrc(fkrc);
-
-        data.setGshkrq(DateUtil.strToDate(req.getDkrq(),
-            DateUtil.FRONT_DATE_FORMAT_STRING));
-
-        data.setFbhhsrq(DateUtil.strToDate(req.getFbhhsrq(),
-            DateUtil.FRONT_DATE_FORMAT_STRING));
-        data.setFbhrc(fbhrc);
-        data.setWzdzrq(DateUtil.strToDate(req.getWzdzrq(),
-            DateUtil.FRONT_DATE_FORMAT_STRING));
-        data.setDjrq(DateUtil.strToDate(req.getDjrq(),
-            DateUtil.FRONT_DATE_FORMAT_STRING));
-        data.setDjrc(djrc);
-
-        data.setTerq(DateUtil.strToDate(req.getTerq(),
-            DateUtil.FRONT_DATE_FORMAT_STRING));
-        data.setDyrq(DateUtil.strToDate(req.getDyrq(),
-            DateUtil.FRONT_DATE_FORMAT_STRING));
-
-        data.setFdje(fdje);
-        data.setPgf(pgf);
-        data.setDzlx(dzlx);
-        if (StringUtils.isNotBlank(req.getQdf())) {
-            data.setQdf(StringValidater.toLong(req.getQdf()));
-        } else {
-            data.setQdf(0L);
-        }
-
-        if (StringUtils.isNotBlank(req.getJx())) {
-            data.setJx(StringValidater.toLong(req.getJx()));
-        } else {
-            data.setJx(0L);
-        }
-
-        if (StringUtils.isNotBlank(req.getQtlr())) {
-            data.setQtlr(StringValidater.toLong(req.getQtlr()));
-        } else {
-            data.setQtlr(0L);
-        }
-
-        data.setFdje(fdje);
-        data.setBzjdke(bzjdke);
-        data.setYsfdje(data.getFdje() - data.getPgf() - data.getDzlx());
-        data.setMlr(data.getYsfdje() - data.getQdf() - data.getJx()
-                - data.getBzjdke() + data.getQtlr());
-        data.setStatus(EBusinessStatus.ARCHIVE_YES.getCode());
-
-        businessDAO.updateStatus(data);
     }
 
 }
