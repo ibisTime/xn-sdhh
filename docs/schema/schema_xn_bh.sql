@@ -28,6 +28,9 @@ CREATE TABLE `tsd_business` (
   `bzjdke` bigint(20) DEFAULT NULL COMMENT '保证金贷款额',
   `mlr` bigint(20) DEFAULT NULL COMMENT '毛利润',
   `status` char(1) DEFAULT NULL COMMENT '状态',
+  `updater` varchar(32) DEFAULT NULL COMMENT '最后更新人',
+  `update_datetime` datetime DEFAULT NULL COMMENT '最后更新时间',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

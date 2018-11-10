@@ -21,7 +21,8 @@ import com.xn.sdhh.spring.SpringContextHolder;
  */
 public class XN630065 extends AProcessor {
 
-    private ISYSUserAO userAO = SpringContextHolder.getBean(ISYSUserAO.class);
+    private ISYSUserAO sysUserAO = SpringContextHolder
+        .getBean(ISYSUserAO.class);
 
     private XN630065Req req = null;
 
@@ -40,7 +41,7 @@ public class XN630065 extends AProcessor {
         int start = StringValidater.toInteger(req.getStart());
         int limit = StringValidater.toInteger(req.getLimit());
 
-        return userAO.querySYSUserPage(start, limit, condition);
+        return sysUserAO.querySYSUserPage(start, limit, condition);
     }
 
     @Override

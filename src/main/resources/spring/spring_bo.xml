@@ -15,12 +15,14 @@
 	<bean id="sysMenuBO" class="com.xn.sdhh.bo.impl.SYSMenuBOImpl">
 		<property name="paginableDAO" ref="sysMenuDAOImpl"/>
 	</bean>
-	
 	<bean id="sysRoleBO" class="com.xn.sdhh.bo.impl.SYSRoleBOImpl">
 		<property name="paginableDAO" ref="sysRoleDAOImpl"/>
 	</bean>
 	<bean id="sysMenuRoleBO" class="com.xn.sdhh.bo.impl.SYSMenuRoleBOImpl">
 		<property name="paginableDAO" ref="sysMenuRoleDAOImpl"/>
+	</bean>
+	<bean id="sysUserBO" class="com.xn.sdhh.bo.impl.SYSUserBOImpl">
+		<property name="paginableDAO" ref="sysUserDAOImpl"/>
 	</bean>
 	<bean id="sysDictBO" class="com.xn.sdhh.bo.impl.SYSDictBOImpl">
 		<property name="paginableDAO" ref="sysDictDAOImpl"/>

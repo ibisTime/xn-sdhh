@@ -36,6 +36,10 @@
 		<result column="bzjdke" property="bzjdke" />
 		<result column="mlr" property="mlr" />
 		<result column="status" property="status" />
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		
+		<result column="remark" property="remark" />
 	</resultMap>
 
 	<sql id="where_condition">
@@ -54,6 +58,9 @@
 			</if>
 			<if test="khmcForQuery != null and khmcForQuery != '' ">
 				AND t.khmc like "%"#{khmcForQuery}"%"
+			</if>
+			<if test="updater != null and updater != '' ">
+				AND t.updater = #{updater}
 			</if>
 		</trim>
 	</sql>
@@ -93,6 +100,10 @@
 		,t.bzjdke
 		,t.mlr
 		,t.status
+		,t.updater
+		,t.update_datetime
+		
+		,t.remark
 		FROM
 		tsd_business t
 		<include refid="where_condition" />
@@ -145,6 +156,10 @@
 		,bzjdke
 		,mlr
 		,status
+		,updater
+		,update_datetime
+		
+		,remark
 		)
 		VALUES(
 		#{code}
@@ -180,6 +195,10 @@
 		,#{bzjdke}
 		,#{mlr}
 		,#{status}
+		,#{updater}
+		,#{updateDatetime}
+		
+		,#{remark}
 		)
 	</insert>
 	
@@ -218,6 +237,10 @@
 		,bzjdke=#{bzjdke}
 		,mlr=#{mlr}
 		,status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		
+		,remark = #{remark}
 		WHERE code = #{code}
 	</update>
 	

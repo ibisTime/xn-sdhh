@@ -351,11 +351,15 @@ public class DateUtil {
      * @create: 2018年9月28日 下午3:13:13 nyc
      * @history:
      */
-
     public static Date getBeforeTime(int hours) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY) - hours);
         return cal.getTime();
     }
 
+    public static void main(String[] args) {
+        System.out.println(String.valueOf(daysBetween(
+            strToDate("2018-10-07", FRONT_DATE_FORMAT_STRING),
+            strToDate("2018-10-01", FRONT_DATE_FORMAT_STRING))));
+    }
 }

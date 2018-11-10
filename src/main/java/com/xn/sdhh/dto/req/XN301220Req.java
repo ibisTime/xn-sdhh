@@ -1,5 +1,7 @@
 package com.xn.sdhh.dto.req;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
  * 录入业务
  * @author: 55484 
@@ -7,6 +9,10 @@ package com.xn.sdhh.dto.req;
  * @history:
  */
 public class XN301220Req {
+
+    // 编号
+    @NotBlank
+    private String code;
 
     // 区域负责人名称
     private String qyfzrmc;
@@ -55,6 +61,28 @@ public class XN301220Req {
 
     // 抵押日期
     private String dyrq;
+
+    // 更新人
+    @NotBlank
+    private String updater;
+
+    private String remark;
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
 
     public String getQyfzrmc() {
         return qyfzrmc;
@@ -184,4 +212,11 @@ public class XN301220Req {
         this.dyrq = dyrq;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }

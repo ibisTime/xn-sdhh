@@ -5,7 +5,6 @@ import java.util.List;
 import com.xn.sdhh.bo.base.Paginable;
 import com.xn.sdhh.domain.Business;
 import com.xn.sdhh.dto.req.XN301220Req;
-import com.xn.sdhh.dto.req.XN301222Req;
 
 public interface IBusinessAO {
 
@@ -18,10 +17,10 @@ public interface IBusinessAO {
     public void removeBusiness(String code);
 
     // 修改业务
-    public void editBusiness(XN301222Req req);
+    public void editBusiness(XN301220Req req);
 
     // 归档
-    public void archiveBusiness(XN301222Req req);
+    public void archiveBusiness(XN301220Req req);
 
     // 分页查询业务
     public Paginable<Business> queryBusinessPage(Business condition, int start,

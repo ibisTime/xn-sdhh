@@ -1,5 +1,6 @@
 package com.xn.sdhh.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -15,23 +16,21 @@ import com.xn.sdhh.core.StringValidater;
 import com.xn.sdhh.dao.IBusinessDAO;
 import com.xn.sdhh.domain.Business;
 import com.xn.sdhh.dto.req.XN301220Req;
-import com.xn.sdhh.dto.req.XN301222Req;
 import com.xn.sdhh.enums.EBusinessStatus;
 import com.xn.sdhh.exception.BizException;
 
 @Component
-public class BusinessBOImpl extends PaginableBOImpl<Business>
-        implements IBusinessBO {
+public class BusinessBOImpl extends PaginableBOImpl<Business> implements
+        IBusinessBO {
 
     @Autowired
     IBusinessDAO businessDAO;
 
     @Override
     public String saveBusiness(XN301220Req req, Long dzlx, Long fdje, Long pgf,
-            Long bzjdke, Integer fbhrc, Integer fkrc, Integer dyrc,
-            Integer djrc) {
-        String code = OrderNoGenerater
-            .generate(EGeneratePrefix.BUSINESS.getCode());
+            Long bzjdke, Integer fbhrc, Integer fkrc, Integer dyrc, Integer djrc) {
+        String code = OrderNoGenerater.generate(EGeneratePrefix.BUSINESS
+            .getCode());
         Business data = new Business();
         data.setCode(code);
         data.setQyfzrmc(req.getQyfzrmc());
@@ -52,7 +51,7 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
             DateUtil.FRONT_DATE_FORMAT_STRING));
 
         data.setFkrc(fkrc);
-        data.setGshkrq(DateUtil.strToDate(req.getDkrq(),
+        data.setGshkrq(DateUtil.strToDate(req.getGshkrq(),
             DateUtil.FRONT_DATE_FORMAT_STRING));
         data.setFbhhsrq(DateUtil.strToDate(req.getFbhhsrq(),
             DateUtil.FRONT_DATE_FORMAT_STRING));
@@ -94,6 +93,8 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
         data.setMlr(data.getYsfdje() - data.getQdf() - data.getJx()
                 - data.getBzjdke() + data.getQtlr());
         data.setStatus(EBusinessStatus.ARCHIVE_NO.getCode());
+        data.setUpdater(req.getUpdater());
+        data.setUpdateDatetime(new Date());
 
         businessDAO.insert(data);
         return code;
@@ -119,7 +120,7 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
     }
 
     @Override
-    public void refreshBusiness(Business data, XN301222Req req, Long dzlx,
+    public void refreshBusiness(Business data, XN301220Req req, Long dzlx,
             Long fdje, Long pgf, Long bzjdke, Integer fbhrc, Integer fkrc,
             Integer dyrc, Integer djrc) {
         data.setQyfzrmc(req.getQyfzrmc());
@@ -141,7 +142,7 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
             DateUtil.FRONT_DATE_FORMAT_STRING));
         data.setFkrc(fkrc);
 
-        data.setGshkrq(DateUtil.strToDate(req.getDkrq(),
+        data.setGshkrq(DateUtil.strToDate(req.getGshkrq(),
             DateUtil.FRONT_DATE_FORMAT_STRING));
 
         data.setFbhhsrq(DateUtil.strToDate(req.getFbhhsrq(),
@@ -185,8 +186,11 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
         data.setMlr(data.getYsfdje() - data.getQdf() - data.getJx()
                 - data.getBzjdke() + data.getQtlr());
 
-        businessDAO.update(data);
+        data.setUpdater(req.getUpdater());
+        data.setUpdateDatetime(new Date());
+        data.setRemark(req.getRemark());
 
+        businessDAO.update(data);
     }
 
     @Override

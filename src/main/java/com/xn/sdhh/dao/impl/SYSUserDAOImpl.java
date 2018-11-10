@@ -8,7 +8,7 @@ import com.xn.sdhh.dao.ISYSUserDAO;
 import com.xn.sdhh.dao.base.support.AMybatisTemplate;
 import com.xn.sdhh.domain.SYSUser;
 
-@Repository("sysuserDAOImpl")
+@Repository("sysUserDAOImpl")
 public class SYSUserDAOImpl extends AMybatisTemplate implements ISYSUserDAO {
 
     @Override
