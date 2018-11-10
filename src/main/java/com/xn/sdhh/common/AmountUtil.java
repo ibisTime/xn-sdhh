@@ -25,7 +25,7 @@ public class AmountUtil {
     public static double div(double rate1, double rate2) {
         BigDecimal a = new BigDecimal(Double.toString(rate1));
         BigDecimal b = new BigDecimal(Double.toString(rate2));
-        return a.divide(b).setScale(2, RoundingMode.DOWN).doubleValue();
+        return a.divide(b, 2, RoundingMode.DOWN).doubleValue();
     }
 
     // 保留两位小数，末尾数不管是几，前一位都加1

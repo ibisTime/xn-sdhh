@@ -34,7 +34,7 @@ public class BusinessAOImpl implements IBusinessAO {
 
     @Override
     public String addBusiness(XN301220Req req) {
-        return js(null, req);
+        return calculate(null, req);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class BusinessAOImpl implements IBusinessAO {
         if (!EBusinessStatus.ARCHIVE_NO.getCode().equals(data.getStatus())) {
             throw new BizException("xn0000", "当前记录不是待归档状态");
         }
-        this.js(data, req);
+        this.calculate(data, req);
     }
 
     @Override
@@ -80,11 +80,11 @@ public class BusinessAOImpl implements IBusinessAO {
             throw new BizException("xn0000", "当前记录不是待归档状态");
         }
         data.setStatus(EBusinessStatus.ARCHIVE_YES.getCode());
-        this.js(data, req);
+        this.calculate(data, req);
 
     }
 
-    private String js(Business data, XN301220Req req) {
+    private String calculate(Business data, XN301220Req req) {
         // 计算返点金额
         // 计算返点金额
         Long fdje = 0L;
