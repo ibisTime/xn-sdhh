@@ -19,7 +19,7 @@ public class AmountUtil {
     public static double div(Long amount, double number) {
         BigDecimal a = new BigDecimal(Double.toString(amount));
         BigDecimal b = new BigDecimal(Double.toString(number));
-        return a.divide(b).setScale(2, RoundingMode.DOWN).doubleValue();
+        return a.divide(b, 2, RoundingMode.DOWN).doubleValue();
     }
 
     public static double div(double rate1, double rate2) {

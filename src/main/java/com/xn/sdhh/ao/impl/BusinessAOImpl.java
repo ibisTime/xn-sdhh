@@ -92,8 +92,8 @@ public class BusinessAOImpl implements IBusinessAO {
         if (StringUtils.isNotBlank(req.getDkje())) {
             Long dkje = StringValidater.toLong(req.getDkje());
             double zhll = StringValidater.toDouble(req.getZhll());
-            double d = AmountUtil.div((zhll - 0.118), 1.1107);
-            fdje = AmountUtil.mul(dkje, d) - AmountUtil.mul(dkje, 0.01) - 400;
+            fdje = (long) (AmountUtil.div(AmountUtil.mul(dkje, (zhll - 0.118)),
+                1.1107) - AmountUtil.mul(dkje, 0.01) - 400000);
             bzjdke = (long) AmountUtil.mul(dkje, 0.01);
         }
 
