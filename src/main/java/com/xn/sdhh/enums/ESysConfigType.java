@@ -10,7 +10,7 @@ import java.util.Map;
  * @history:
  */
 public enum ESysConfigType {
-    QINIU("qiniu", "七牛参数"), PG_AMOUNT("pg_amount", "评估费用");
+    QINIU("qiniu", "七牛参数"), COST("cost", "工程费用");
 
     public static Map<String, ESysConfigType> getMap() {
         Map<String, ESysConfigType> map = new HashMap<String, ESysConfigType>();

@@ -114,6 +114,54 @@ public class Business extends ABaseDO {
     // 客户名称
     private String khmcForQuery;
 
+    // 银行放款日期起
+    private Date yhfkrqStart;
+
+    // 银行放款日期止
+    private Date yhfkrqEnd;
+
+    // 打件日期起
+    private Date djrqStart;
+
+    // 打件日期止
+    private Date djrqEnd;
+
+    public Date getDjrqStart() {
+        return djrqStart;
+    }
+
+    public void setDjrqStart(Date djrqStart) {
+        this.djrqStart = djrqStart;
+    }
+
+    public Date getDjrqEnd() {
+        return djrqEnd;
+    }
+
+    public void setDjrqEnd(Date djrqEnd) {
+        this.djrqEnd = djrqEnd;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public Date getYhfkrqStart() {
+        return yhfkrqStart;
+    }
+
+    public void setYhfkrqStart(Date yhfkrqStart) {
+        this.yhfkrqStart = yhfkrqStart;
+    }
+
+    public Date getYhfkrqEnd() {
+        return yhfkrqEnd;
+    }
+
+    public void setYhfkrqEnd(Date yhfkrqEnd) {
+        this.yhfkrqEnd = yhfkrqEnd;
+    }
+
     public String getUpdater() {
         return updater;
     }

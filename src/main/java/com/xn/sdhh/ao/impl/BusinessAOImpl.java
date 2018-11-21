@@ -2,6 +2,7 @@ package com.xn.sdhh.ao.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.xn.sdhh.bo.ISYSConfigBO;
 import com.xn.sdhh.bo.base.Paginable;
 import com.xn.sdhh.common.AmountUtil;
 import com.xn.sdhh.common.DateUtil;
+import com.xn.sdhh.common.SysConstant;
 import com.xn.sdhh.core.StringValidater;
 import com.xn.sdhh.domain.Business;
 import com.xn.sdhh.domain.SYSConfig;
@@ -35,22 +37,6 @@ public class BusinessAOImpl implements IBusinessAO {
     @Override
     public String addBusiness(XN301220Req req) {
         return calculate(null, req);
-    }
-
-    @Override
-    public Paginable<Business> queryBusinessPage(Business condition, int start,
-            int limit) {
-        return businessBO.getPaginable(start, limit, condition);
-    }
-
-    @Override
-    public List<Business> queryBusinessList(Business condition) {
-        return businessBO.queryBusinessList(condition);
-    }
-
-    @Override
-    public Business getBusiness(String code) {
-        return businessBO.getBusiness(code);
     }
 
     @Override
@@ -84,24 +70,29 @@ public class BusinessAOImpl implements IBusinessAO {
 
     }
 
+    // 计算返点金额
     private String calculate(Business data, XN301220Req req) {
-        // 计算返点金额
-        // 计算返点金额
         Long fdje = 0L;
         Long bzjdke = 0L;
+        Long dkje = StringValidater.toLong(req.getDkje());
+
+        Map<String, String> map = sysConfigBO.getConfigsMap(ESysConfigType.COST
+            .getCode());
         if (StringUtils.isNotBlank(req.getDkje())) {
-            Long dkje = StringValidater.toLong(req.getDkje());
             double zhll = StringValidater.toDouble(req.getZhll());
+            // GPS打件费用
+            Long gpsDjFee = AmountUtil.mul(1000L,
+                StringValidater.toDouble(map.get(SysConstant.GPSDJ_FEE))
+                    .doubleValue());
             fdje = (long) (AmountUtil.div(AmountUtil.mul(dkje, (zhll - 0.118)),
-                1.1107) - AmountUtil.mul(dkje, 0.01) - 400000);
+                1.1107) - AmountUtil.mul(dkje, 0.01) - gpsDjFee);
             bzjdke = (long) AmountUtil.mul(dkje, 0.01);
         }
 
         // 评估费
         Long pgFee = 0L;
         if (ECarKind.CAR_SECOND.getCode().equals(req.getQczl())) {
-            SYSConfig config = sysConfigBO.getConfig(ESysConfigType.PG_AMOUNT
-                .getCode());
+            SYSConfig config = sysConfigBO.getConfig(SysConstant.PG_AMOUNT);
             if (null != config) {
                 pgFee = AmountUtil.mul(1000L,
                     StringValidater.toDouble(config.getCvalue()).doubleValue());
@@ -115,7 +106,6 @@ public class BusinessAOImpl implements IBusinessAO {
         if (StringUtils.isNotBlank(req.getYhfkrq())
                 && StringUtils.isNotBlank(req.getWzdzrq())
                 && StringUtils.isNotBlank(req.getDkje())) {
-            Long dkje = StringValidater.toLong(req.getDkje());
             Date yhfkrq = DateUtil.strToDate(req.getYhfkrq(),
                 DateUtil.FRONT_DATE_FORMAT_STRING);
             Date wzdzrq = DateUtil.strToDate(req.getWzdzrq(),
@@ -162,16 +152,38 @@ public class BusinessAOImpl implements IBusinessAO {
                 req.getDyrq(), DateUtil.FRONT_DATE_FORMAT_STRING));
         }
 
+        double zhll = StringValidater.toDouble(req.getZhll());
+        // 应收返点金额=((综合利率-11.07%)/1.1107+11.07%-11.8%）*贷款额-贷款额*1%
+        Long ysfdje = AmountUtil.mul(
+            (AmountUtil.div((zhll - 0.1107), 1.1107) + 0.1107 - 0.118), dkje)
+                - AmountUtil.mul(dkje, 0.01);
         String code = null;
         if (data == null) {
             code = businessBO.saveBusiness(req, dzlx, fdje, pgFee, bzjdke,
-                fbhrc, fkrc, dyrc, djrc);
+                fbhrc, fkrc, dyrc, djrc, zhll, ysfdje);
         } else {
             businessBO.refreshBusiness(data, req, dzlx, fdje, pgFee, bzjdke,
-                fbhrc, fkrc, dyrc, djrc);
+                fbhrc, fkrc, dyrc, djrc, zhll, ysfdje);
             code = data.getCode();
         }
-
         return code;
+    }
+
+    @Override
+    public Paginable<Business> queryBusinessPage(Business condition, int start,
+            int limit) {
+        Paginable<Business> page = businessBO.getPaginable(start, limit,
+            condition);
+        return page;
+    }
+
+    @Override
+    public List<Business> queryBusinessList(Business condition) {
+        return businessBO.queryBusinessList(condition);
+    }
+
+    @Override
+    public Business getBusiness(String code) {
+        return businessBO.getBusiness(code);
     }
 }

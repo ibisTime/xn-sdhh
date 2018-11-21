@@ -1,9 +1,10 @@
 package com.xn.sdhh.dto.req;
 
+
 /**
- * 会计补充信息
- * @author: 55484 
- * @since: 2018年10月24日 下午8:52:34 
+ * 业务分页查询
+ * @author: xieyj 
+ * @since: 2018年11月21日 下午4:44:14 
  * @history:
  */
 public class XN301235Req extends APageReq {
@@ -21,6 +22,50 @@ public class XN301235Req extends APageReq {
 
     // 客户名称
     private String khmc;
+
+    // 银行放款日期起
+    private String yhfkrqStart;
+
+    // 银行放款日期止
+    private String yhfkrqEnd;
+
+    // 打件日期起
+    private String djrqStart;
+
+    // 打件日期止
+    private String djrqEnd;
+
+    public String getYhfkrqStart() {
+        return yhfkrqStart;
+    }
+
+    public void setYhfkrqStart(String yhfkrqStart) {
+        this.yhfkrqStart = yhfkrqStart;
+    }
+
+    public String getYhfkrqEnd() {
+        return yhfkrqEnd;
+    }
+
+    public void setYhfkrqEnd(String yhfkrqEnd) {
+        this.yhfkrqEnd = yhfkrqEnd;
+    }
+
+    public String getDjrqStart() {
+        return djrqStart;
+    }
+
+    public void setDjrqStart(String djrqStart) {
+        this.djrqStart = djrqStart;
+    }
+
+    public String getDjrqEnd() {
+        return djrqEnd;
+    }
+
+    public void setDjrqEnd(String djrqEnd) {
+        this.djrqEnd = djrqEnd;
+    }
 
     public String getQyfzrmc() {
         return qyfzrmc;

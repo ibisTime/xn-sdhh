@@ -47,20 +47,37 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="qyfzrmc != null and qyfzrmc != '' ">
+				AND t.qyfzrmc = #{qyfzrmc}
+			</if>
+			<if test="qyfzrmcForQuery != null and qyfzrmcForQuery != '' ">
+				AND t.qyfzrmc like "%"#{qyfzrmcForQuery}"%"
+			</if>
 			<if test="qczl != null and qczl != '' ">
 				AND t.qczl = #{qczl}
 			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
 			</if>
-			<if test="qyfzrmcForQuery != null and qyfzrmcForQuery != '' ">
-				AND t.qyfzrmc like "%"#{qyfzrmcForQuery}"%"
-			</if>
 			<if test="khmcForQuery != null and khmcForQuery != '' ">
 				AND t.khmc like "%"#{khmcForQuery}"%"
 			</if>
 			<if test="updater != null and updater != '' ">
 				AND t.updater = #{updater}
+			</if>
+			
+			<if test="yhfkrqStart != null and yhfkrqStart != '' ">
+				<![CDATA[AND t.yhfkrq >= #{yhfkrqStart}]]>
+			</if>
+			<if test="yhfkrqEnd != null and yhfkrqEnd != '' ">
+				<![CDATA[AND t.yhfkrq <= #{yhfkrqEnd}]]>
+			</if>
+			
+			<if test="djrqStart != null and djrqStart != '' ">
+				<![CDATA[AND t.djrq >= #{djrqStart}]]>
+			</if>
+			<if test="djrqEnd != null and djrqEnd != '' ">
+				<![CDATA[AND t.djrq <= #{djrqEnd}]]>
 			</if>
 		</trim>
 	</sql>

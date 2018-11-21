@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.xn.sdhh.ao.IBusinessAO;
 import com.xn.sdhh.api.AProcessor;
+import com.xn.sdhh.common.DateUtil;
 import com.xn.sdhh.common.JsonUtil;
 import com.xn.sdhh.core.ObjValidater;
 import com.xn.sdhh.core.StringValidater;
@@ -29,10 +30,17 @@ public class XN301235 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         Business condition = new Business();
+        condition.setQyfzrmcForQuery(req.getQyfzrmc());
         condition.setStatus(req.getStatus());
         condition.setQczl(req.getQczl());
         condition.setKhmcForQuery(req.getKhmc());
-        condition.setQyfzrmcForQuery(req.getQyfzrmc());
+
+        condition.setYhfkrqStart(DateUtil.getFrontDate(req.getYhfkrqStart(),
+            false));
+        condition.setYhfkrqEnd(DateUtil.getFrontDate(req.getYhfkrqEnd(), true));
+        condition
+            .setDjrqStart(DateUtil.getFrontDate(req.getDjrqStart(), false));
+        condition.setDjrqEnd(DateUtil.getFrontDate(req.getDjrqEnd(), true));
 
         String column = req.getOrderColumn();
         if (StringUtils.isBlank(column)) {

@@ -28,7 +28,8 @@ public class BusinessBOImpl extends PaginableBOImpl<Business> implements
 
     @Override
     public String saveBusiness(XN301220Req req, Long dzlx, Long fdje, Long pgf,
-            Long bzjdke, Integer fbhrc, Integer fkrc, Integer dyrc, Integer djrc) {
+            Long bzjdke, Integer fbhrc, Integer fkrc, Integer dyrc,
+            Integer djrc, double zhll, Long ysfdje) {
         String code = OrderNoGenerater.generate(EGeneratePrefix.BUSINESS
             .getCode());
         Business data = new Business();
@@ -38,7 +39,7 @@ public class BusinessBOImpl extends PaginableBOImpl<Business> implements
 
         data.setKhmc(req.getKhmc());
         data.setDkje(StringValidater.toLong(req.getDkje()));
-        data.setZhll(StringValidater.toDouble(req.getZhll()));
+        data.setZhll(zhll);
         data.setDyrc(dyrc);
         data.setPgf(pgf);
 
@@ -89,7 +90,7 @@ public class BusinessBOImpl extends PaginableBOImpl<Business> implements
 
         data.setFdje(fdje);
         data.setBzjdke(bzjdke);
-        data.setYsfdje(data.getFdje() - data.getPgf() - data.getDzlx());
+        data.setYsfdje(ysfdje);
         data.setMlr(data.getYsfdje() - data.getQdf() - data.getJx()
                 - data.getBzjdke() + data.getQtlr());
         data.setStatus(EBusinessStatus.ARCHIVE_NO.getCode());
@@ -122,14 +123,14 @@ public class BusinessBOImpl extends PaginableBOImpl<Business> implements
     @Override
     public void refreshBusiness(Business data, XN301220Req req, Long dzlx,
             Long fdje, Long pgf, Long bzjdke, Integer fbhrc, Integer fkrc,
-            Integer dyrc, Integer djrc) {
+            Integer dyrc, Integer djrc, double zhll, Long ysfdje) {
         data.setQyfzrmc(req.getQyfzrmc());
         data.setQczl(req.getQczl());
         data.setKhmc(req.getKhmc());
 
         data.setDyrc(dyrc);
         data.setDkje(StringValidater.toLong(req.getDkje()));
-        data.setZhll(StringValidater.toDouble(req.getZhll()));
+        data.setZhll(zhll);
 
         data.setPgf(pgf);
         data.setQdf(StringValidater.toLong(req.getQdf()));
@@ -182,7 +183,7 @@ public class BusinessBOImpl extends PaginableBOImpl<Business> implements
 
         data.setFdje(fdje);
         data.setBzjdke(bzjdke);
-        data.setYsfdje(data.getFdje() - data.getPgf() - data.getDzlx());
+        data.setYsfdje(ysfdje);
         data.setMlr(data.getYsfdje() - data.getQdf() - data.getJx()
                 - data.getBzjdke() + data.getQtlr());
 

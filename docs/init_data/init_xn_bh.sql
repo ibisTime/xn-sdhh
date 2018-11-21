@@ -17,6 +17,7 @@ insert into `tsys_config` (`type`, `ckey`, `cvalue`, `updater`, `update_datetime
 insert into `tsys_config` (`type`, `ckey`, `cvalue`, `updater`, `update_datetime`, `remark`) values('sys_txt','about_us','<p><img src=\"http://otoieuivb.bkt.clouddn.com/IMG_2130_1524907296779.JPG\" style=\"max-width:100%\"></p><p>关于我们</p><p><br></p>','admin',now(),'关于我们');
 insert into `tsys_config` (`type`, `ckey`, `cvalue`, `updater`, `update_datetime`, `remark`) values('sys_txt','service_time','<p><span style=\"font-size: xx-large;\">9:00-17:00</span></p>','admin',now(),'服务时间');
 insert into `tsys_config` (`type`, `ckey`, `cvalue`, `updater`, `update_datetime`, `remark`) values('cost','pg_amount','200','admin',now(),'评估费');
+insert into `tsys_config` (`type`, `ckey`, `cvalue`, `updater`, `update_datetime`, `remark`) values('cost','gpsdj_fee','400','admin',now(),'GPS打件费用');
 
 /*
 -- Query: select `code`,`name`,`type`,`url`,`order_no`,`updater`,now() `update_datetime`,`remark`,`parent_code`,`system_code` from tsys_menu
