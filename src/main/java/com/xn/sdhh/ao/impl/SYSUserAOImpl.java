@@ -209,4 +209,24 @@ public class SYSUserAOImpl implements ISYSUserAO {
         return sysUserBO.getSYSUser(code);
 
     }
+
+    @Override
+    public void doModifyLoginPwd(String userId, String oldLoginPwd,
+            String newLoginPwd) {
+        if (oldLoginPwd.equals(newLoginPwd)) {
+            throw new BizException("li01006", "新登录密码不能与原有密码重复");
+        }
+        // 验证当前登录密码是否正确
+        sysUserBO.checkLoginPwd(userId, oldLoginPwd);
+        // 重置
+        sysUserBO.refreshLoginPwd(userId, newLoginPwd);
+        // 发送短信
+        // SYSUser user = sysUserBO.getUser(userId);
+        // if (!EUserKind.Plat.getCode().equals(user.getType())) {
+        // smsOutBO.sendSmsOut(user.getMobile(),
+        // "尊敬的" + PhoneUtil.hideMobile(user.getMobile())
+        // + "用户，您的登录密码修改成功。请妥善保管您的账户相关信息。",
+        // "805064", user.getCompanyCode(), user.getSystemCode());
+        // }
+    }
 }

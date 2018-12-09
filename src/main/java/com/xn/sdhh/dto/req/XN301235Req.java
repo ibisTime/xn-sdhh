@@ -1,6 +1,5 @@
 package com.xn.sdhh.dto.req;
 
-
 /**
  * 业务分页查询
  * @author: xieyj 
@@ -23,6 +22,12 @@ public class XN301235Req extends APageReq {
     // 客户名称
     private String khmc;
 
+    // 打款日期
+    private String dkrqStart;
+
+    // 打款日期
+    private String dkrqEnd;
+
     // 银行放款日期起
     private String yhfkrqStart;
 
@@ -41,6 +46,22 @@ public class XN301235Req extends APageReq {
 
     public void setYhfkrqStart(String yhfkrqStart) {
         this.yhfkrqStart = yhfkrqStart;
+    }
+
+    public String getDkrqStart() {
+        return dkrqStart;
+    }
+
+    public void setDkrqStart(String dkrqStart) {
+        this.dkrqStart = dkrqStart;
+    }
+
+    public String getDkrqEnd() {
+        return dkrqEnd;
+    }
+
+    public void setDkrqEnd(String dkrqEnd) {
+        this.dkrqEnd = dkrqEnd;
     }
 
     public String getYhfkrqEnd() {

@@ -35,11 +35,17 @@ public class XN301220Req {
     // 渠道费
     private String qdf;
 
+    // 渠道费发放日期
+    private String qdfffrq;
+
     // 绩效
     private String jx;
 
     // 其他利润
     private String qtlr;
+
+    // 保证金贷款额
+    private String bzjdke;
 
     // 银行放款日期
     private String yhfkrq;
@@ -76,6 +82,14 @@ public class XN301220Req {
         this.remark = remark;
     }
 
+    public String getQdfffrq() {
+        return qdfffrq;
+    }
+
+    public void setQdfffrq(String qdfffrq) {
+        this.qdfffrq = qdfffrq;
+    }
+
     public String getUpdater() {
         return updater;
     }
@@ -98,6 +112,14 @@ public class XN301220Req {
 
     public void setQczl(String qczl) {
         this.qczl = qczl;
+    }
+
+    public String getBzjdke() {
+        return bzjdke;
+    }
+
+    public void setBzjdke(String bzjdke) {
+        this.bzjdke = bzjdke;
     }
 
     public String getKhmc() {

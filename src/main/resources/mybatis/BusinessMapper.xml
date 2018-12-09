@@ -30,6 +30,7 @@
 		<result column="dzlx" property="dzlx" />
 		<result column="ysfdje" property="ysfdje" />
 		<result column="qdf" property="qdf" />
+		<result column="qdfffrq" property="qdfffrq" />
 		<result column="jx" property="jx" />
 		<result column="qtlr" property="qtlr" />
 		
@@ -64,6 +65,13 @@
 			</if>
 			<if test="updater != null and updater != '' ">
 				AND t.updater = #{updater}
+			</if>
+			
+			<if test="dkrqStart != null and dkrqStart != '' ">
+				<![CDATA[AND t.dkrq >= #{dkrqStart}]]>
+			</if>
+			<if test="dkrqEnd != null and dkrqEnd != '' ">
+				<![CDATA[AND t.dkrq <= #{dkrqEnd}]]>
 			</if>
 			
 			<if test="yhfkrqStart != null and yhfkrqStart != '' ">
@@ -111,6 +119,7 @@
 		,t.dzlx
 		,t.ysfdje
 		,t.qdf
+		,t.qdfffrq
 		,t.jx
 		,t.qtlr
 		
@@ -167,6 +176,7 @@
 		,dzlx
 		,ysfdje
 		,qdf
+		,qdfffrq
 		,jx
 		,qtlr
 		
@@ -206,6 +216,7 @@
 		,#{dzlx}
 		,#{ysfdje}
 		,#{qdf}
+		,#{qdfffrq}
 		,#{jx}
 		,#{qtlr}
 		
@@ -248,6 +259,7 @@
 		,dzlx=#{dzlx}
 		,ysfdje=#{ysfdje}
 		,qdf=#{qdf}
+		,qdfffrq=#{qdfffrq}
 		,jx=#{jx}
 		,qtlr=#{qtlr}
 		

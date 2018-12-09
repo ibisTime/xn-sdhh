@@ -83,6 +83,9 @@ public class Business extends ABaseDO {
     // 渠道费
     private Long qdf;
 
+    // 渠道费发放日期
+    private Date qdfffrq;
+
     // 绩效
     private Long jx;
 
@@ -114,6 +117,12 @@ public class Business extends ABaseDO {
     // 客户名称
     private String khmcForQuery;
 
+    // 打款日期起
+    private Date dkrqStart;
+
+    // 打款日期止
+    private Date dkrqEnd;
+
     // 银行放款日期起
     private Date yhfkrqStart;
 
@@ -144,6 +153,22 @@ public class Business extends ABaseDO {
 
     public static long getSerialversionuid() {
         return serialVersionUID;
+    }
+
+    public Date getDkrqStart() {
+        return dkrqStart;
+    }
+
+    public void setDkrqStart(Date dkrqStart) {
+        this.dkrqStart = dkrqStart;
+    }
+
+    public Date getDkrqEnd() {
+        return dkrqEnd;
+    }
+
+    public void setDkrqEnd(Date dkrqEnd) {
+        this.dkrqEnd = dkrqEnd;
     }
 
     public Date getYhfkrqStart() {
@@ -184,6 +209,14 @@ public class Business extends ABaseDO {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Date getQdfffrq() {
+        return qdfffrq;
+    }
+
+    public void setQdfffrq(Date qdfffrq) {
+        this.qdfffrq = qdfffrq;
     }
 
     public String getCode() {
