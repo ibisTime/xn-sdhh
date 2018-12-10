@@ -11,21 +11,20 @@ import com.xn.sdhh.exception.ParaException;
 import com.xn.sdhh.spring.SpringContextHolder;
 
 /**
- * 重置登录密码
- * @author: chenshan 
- * @since: 2018年3月25日 下午4:36:19 
+ * 根据旧密码修改新密码
+ * @author: nyc 
+ * @since: 2018年4月24日 上午11:30:04 
  * @history:
  */
 public class XN630054 extends AProcessor {
 
-    private ISYSUserAO sysUserAO = SpringContextHolder
-        .getBean(ISYSUserAO.class);
+    private ISYSUserAO userAO = SpringContextHolder.getBean(ISYSUserAO.class);
 
     private XN630054Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
-        sysUserAO.editPwd(req.getUserId(), req.getOldLoginPwd(),
+        userAO.doModifyLoginPwd(req.getUserId(), req.getOldLoginPwd(),
             req.getNewLoginPwd());
         return new BooleanRes(true);
     }
@@ -35,5 +34,4 @@ public class XN630054 extends AProcessor {
         req = JsonUtil.json2Bean(inputparams, XN630054Req.class);
         ObjValidater.validateReq(req);
     }
-
 }

@@ -22,6 +22,10 @@ public interface ISYSUserAO {
     // 用户登录
     public String doLogin(String loginName, String loginPwd);
 
+    // 根据旧密码修改新密码
+    public void doModifyLoginPwd(String userId, String oldLoginPwd,
+            String newLoginPwd);
+
     // 注销 | 激活其他管理员
     public void doCloseOpen(String userId, String updater, String remark);
 

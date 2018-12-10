@@ -34,9 +34,13 @@ public class XN301235 extends AProcessor {
         condition.setStatus(req.getStatus());
         condition.setQczl(req.getQczl());
         condition.setKhmcForQuery(req.getKhmc());
+        condition.setQczl(req.getQczl());
 
-        condition.setYhfkrqStart(DateUtil.getFrontDate(req.getYhfkrqStart(),
-            false));
+        condition
+            .setDkrqStart(DateUtil.getFrontDate(req.getDkrqStart(), false));
+        condition.setDkrqEnd(DateUtil.getFrontDate(req.getDkrqEnd(), true));
+        condition
+            .setYhfkrqStart(DateUtil.getFrontDate(req.getYhfkrqStart(), false));
         condition.setYhfkrqEnd(DateUtil.getFrontDate(req.getYhfkrqEnd(), true));
         condition
             .setDjrqStart(DateUtil.getFrontDate(req.getDjrqStart(), false));

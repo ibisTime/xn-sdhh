@@ -73,20 +73,19 @@ public class BusinessAOImpl implements IBusinessAO {
     // 计算返点金额
     private String calculate(Business data, XN301220Req req) {
         Long fdje = 0L;
-        Long bzjdke = 0L;
+        // Long bzjdke = 0L;
         Long dkje = StringValidater.toLong(req.getDkje());
 
-        Map<String, String> map = sysConfigBO.getConfigsMap(ESysConfigType.COST
-            .getCode());
+        Map<String, String> map = sysConfigBO
+            .getConfigsMap(ESysConfigType.COST.getCode());
         if (StringUtils.isNotBlank(req.getDkje())) {
             double zhll = StringValidater.toDouble(req.getZhll());
             // GPS打件费用
-            Long gpsDjFee = AmountUtil.mul(1000L,
-                StringValidater.toDouble(map.get(SysConstant.GPSDJ_FEE))
-                    .doubleValue());
+            Long gpsDjFee = AmountUtil.mul(1000L, StringValidater
+                .toDouble(map.get(SysConstant.GPSDJ_FEE)).doubleValue());
             fdje = (long) (AmountUtil.div(AmountUtil.mul(dkje, (zhll - 0.118)),
                 1.1107) - AmountUtil.mul(dkje, 0.01) - gpsDjFee);
-            bzjdke = (long) AmountUtil.mul(dkje, 0.01);
+            // bzjdke = (long) AmountUtil.mul(dkje, 0.01);
         }
 
         // 评估费
@@ -101,7 +100,7 @@ public class BusinessAOImpl implements IBusinessAO {
             }
         }
 
-        // 垫资利息
+        // 垫资利息:贷款金额*1.6%/30*（银行放款日期-温州垫资日期）
         Long dzlx = 0L;
         if (StringUtils.isNotBlank(req.getYhfkrq())
                 && StringUtils.isNotBlank(req.getWzdzrq())
@@ -112,44 +111,52 @@ public class BusinessAOImpl implements IBusinessAO {
                 DateUtil.FRONT_DATE_FORMAT_STRING);
             dzlx = AmountUtil.mul(
                 AmountUtil.div(AmountUtil.mul(dkje, 0.016), 30.0),
-                DateUtil.daysBetween(wzdzrq, yhfkrq) + 2);// 10.1 ---10.7
-                                                          // 方法算出来6天要加一天，按公式再加一个天，所以+2
+                DateUtil.daysBetween(wzdzrq, yhfkrq) + 1);// 10.1 ---10.7
+                                                          // 方法算出来6天要加一天，按公式再加一个天
         }
 
         // 发保和日差
         Integer fbhrc = null;
         if (StringUtils.isNotBlank(req.getFbhhsrq())
                 && StringUtils.isNotBlank(req.getDkrq())) {
-            fbhrc = DateUtil.daysBetween(DateUtil.strToDate(req.getDkrq(),
-                DateUtil.FRONT_DATE_FORMAT_STRING), DateUtil.strToDate(
-                req.getFbhhsrq(), DateUtil.FRONT_DATE_FORMAT_STRING));
+            fbhrc = DateUtil.daysBetween(
+                DateUtil.strToDate(req.getDkrq(),
+                    DateUtil.FRONT_DATE_FORMAT_STRING),
+                DateUtil.strToDate(req.getFbhhsrq(),
+                    DateUtil.FRONT_DATE_FORMAT_STRING));
         }
 
         // 打件日差
         Integer djrc = null;
         if (StringUtils.isNotBlank(req.getDjrq())
                 && StringUtils.isNotBlank(req.getDkrq())) {
-            djrc = DateUtil.daysBetween(DateUtil.strToDate(req.getDkrq(),
-                DateUtil.FRONT_DATE_FORMAT_STRING), DateUtil.strToDate(
-                req.getDjrq(), DateUtil.FRONT_DATE_FORMAT_STRING));
+            djrc = DateUtil.daysBetween(
+                DateUtil.strToDate(req.getDkrq(),
+                    DateUtil.FRONT_DATE_FORMAT_STRING),
+                DateUtil.strToDate(req.getDjrq(),
+                    DateUtil.FRONT_DATE_FORMAT_STRING));
         }
 
         // 放款日差
         Integer fkrc = null;
         if (StringUtils.isNotBlank(req.getYhfkrq())
                 && StringUtils.isNotBlank(req.getDkrq())) {
-            fkrc = DateUtil.daysBetween(DateUtil.strToDate(req.getDkrq(),
-                DateUtil.FRONT_DATE_FORMAT_STRING), DateUtil.strToDate(
-                req.getYhfkrq(), DateUtil.FRONT_DATE_FORMAT_STRING));
+            fkrc = DateUtil.daysBetween(
+                DateUtil.strToDate(req.getDkrq(),
+                    DateUtil.FRONT_DATE_FORMAT_STRING),
+                DateUtil.strToDate(req.getYhfkrq(),
+                    DateUtil.FRONT_DATE_FORMAT_STRING));
         }
 
         // 抵押日差
         Integer dyrc = null;
         if (StringUtils.isNotBlank(req.getDyrq())
                 && StringUtils.isNotBlank(req.getDkrq())) {
-            dyrc = DateUtil.daysBetween(DateUtil.strToDate(req.getDkrq(),
-                DateUtil.FRONT_DATE_FORMAT_STRING), DateUtil.strToDate(
-                req.getDyrq(), DateUtil.FRONT_DATE_FORMAT_STRING));
+            dyrc = DateUtil.daysBetween(
+                DateUtil.strToDate(req.getDkrq(),
+                    DateUtil.FRONT_DATE_FORMAT_STRING),
+                DateUtil.strToDate(req.getDyrq(),
+                    DateUtil.FRONT_DATE_FORMAT_STRING));
         }
 
         double zhll = StringValidater.toDouble(req.getZhll());
@@ -159,14 +166,34 @@ public class BusinessAOImpl implements IBusinessAO {
                 - AmountUtil.mul(dkje, 0.01);
         String code = null;
         if (data == null) {
-            code = businessBO.saveBusiness(req, dzlx, fdje, pgFee, bzjdke,
-                fbhrc, fkrc, dyrc, djrc, zhll, ysfdje);
+            code = businessBO.saveBusiness(req, dzlx, fdje, pgFee,
+                StringValidater.toLong(req.getBzjdke()), fbhrc, fkrc, dyrc,
+                djrc, zhll, ysfdje);
         } else {
-            businessBO.refreshBusiness(data, req, dzlx, fdje, pgFee, bzjdke,
-                fbhrc, fkrc, dyrc, djrc, zhll, ysfdje);
+            businessBO.refreshBusiness(data, req, dzlx, fdje, pgFee,
+                StringValidater.toLong(req.getBzjdke()), fbhrc, fkrc, dyrc,
+                djrc, zhll, ysfdje);
             code = data.getCode();
         }
         return code;
+    }
+
+    public static void main(String[] args) {
+        // double div = AmountUtil.div((0.01 - 0.1107), 1.1107);
+        // BigDecimal d1 = new BigDecimal("0.1107").add(new BigDecimal(div));
+        // BigDecimal d2 = d1.subtract(new BigDecimal("0.118"));
+        // BigDecimal divide = d2.multiply(new BigDecimal("12000"));
+        // BigDecimal long2 = new BigDecimal("12000")
+        // .multiply(new BigDecimal("0.01"));
+        // BigDecimal s = divide.subtract(long2);
+        // System.out.println(s);
+
+        Double d1 = AmountUtil.div((0.2 - 0.1107), 1.1107);
+        Double d2 = d1 + 0.1107 - 0.118;
+        Long long1 = AmountUtil.mul((d2), 12000);
+        Long long2 = AmountUtil.mul(12000, 0.01);
+        Long ysfdje = long1 - long2;
+        System.out.println(ysfdje);
     }
 
     @Override

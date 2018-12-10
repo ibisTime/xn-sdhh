@@ -1,33 +1,33 @@
-/**
- * @Title XN630054Req.java 
- * @Package com.ogc.standard.dto.req 
- * @Description 
- * @author dl  
- * @date 2018年8月23日 下午3:24:40 
- * @version V1.0   
- */
 package com.xn.sdhh.dto.req;
 
-/** 
- * 根据旧密码修改密码
- * @author: dl 
- * @since: 2018年8月23日 下午3:24:40 
+import org.hibernate.validator.constraints.NotBlank;
+
+/**
+ * 根据旧密码修改新密码
+ * @author: CYL 
+ * @since: 2018年12月9日 下午4:04:43 
  * @history:
  */
 public class XN630054Req {
 
-    private String newLoginPwd;
-
-    private String oldLoginPwd;
-
+    // userId
+    @NotBlank(message = "userId不能为空")
     private String userId;
 
-    public String getNewLoginPwd() {
-        return newLoginPwd;
+    // 原登录密码
+    @NotBlank(message = "原登录密码不能为空")
+    private String oldLoginPwd;
+
+    // 新登录密码
+    @NotBlank(message = "新登录密码不能为空")
+    private String newLoginPwd;
+
+    public String getUserId() {
+        return userId;
     }
 
-    public void setNewLoginPwd(String newLoginPwd) {
-        this.newLoginPwd = newLoginPwd;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getOldLoginPwd() {
@@ -38,11 +38,11 @@ public class XN630054Req {
         this.oldLoginPwd = oldLoginPwd;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getNewLoginPwd() {
+        return newLoginPwd;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setNewLoginPwd(String newLoginPwd) {
+        this.newLoginPwd = newLoginPwd;
     }
 }

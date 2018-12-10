@@ -12,6 +12,7 @@ import com.xn.sdhh.bo.ISYSUserBO;
 import com.xn.sdhh.bo.base.PaginableBOImpl;
 import com.xn.sdhh.common.MD5Util;
 import com.xn.sdhh.common.PhoneUtil;
+import com.xn.sdhh.common.PwdUtil;
 import com.xn.sdhh.core.OrderNoGenerater;
 import com.xn.sdhh.dao.ISYSUserDAO;
 import com.xn.sdhh.domain.SYSUser;
@@ -224,6 +225,17 @@ public class SYSUserBOImpl extends PaginableBOImpl<SYSUser>
             data.setUpdateDatetime(new Date());
             data.setRemark(remark);
             sysUserDAO.updateRole(data);
+        }
+    }
+
+    @Override
+    public void refreshLoginPwd(String userId, String newLoginPwd) {
+        if (StringUtils.isNotBlank(userId)) {
+            SYSUser data = getSYSUser(userId);
+            data.setLoginPwd(MD5Util.md5(newLoginPwd));
+            data.setLoginPwdStrength(
+                PwdUtil.calculateSecurityLevel(newLoginPwd));
+            sysUserDAO.updateLoginPwd(data);
         }
     }
 
