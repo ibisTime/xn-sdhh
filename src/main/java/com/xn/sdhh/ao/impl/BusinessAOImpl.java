@@ -178,6 +178,24 @@ public class BusinessAOImpl implements IBusinessAO {
         return code;
     }
 
+    public static void main(String[] args) {
+        // double div = AmountUtil.div((0.01 - 0.1107), 1.1107);
+        // BigDecimal d1 = new BigDecimal("0.1107").add(new BigDecimal(div));
+        // BigDecimal d2 = d1.subtract(new BigDecimal("0.118"));
+        // BigDecimal divide = d2.multiply(new BigDecimal("12000"));
+        // BigDecimal long2 = new BigDecimal("12000")
+        // .multiply(new BigDecimal("0.01"));
+        // BigDecimal s = divide.subtract(long2);
+        // System.out.println(s);
+
+        Double d1 = AmountUtil.div((0.2 - 0.1107), 1.1107);
+        Double d2 = d1 + 0.1107 - 0.118;
+        Long long1 = AmountUtil.mul((d2), 12000);
+        Long long2 = AmountUtil.mul(12000, 0.01);
+        Long ysfdje = long1 - long2;
+        System.out.println(ysfdje);
+    }
+
     @Override
     public Paginable<Business> queryBusinessPage(Business condition, int start,
             int limit) {
