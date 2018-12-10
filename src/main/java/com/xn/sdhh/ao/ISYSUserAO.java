@@ -37,8 +37,10 @@ public interface ISYSUserAO {
             String newLoginPwd);
 
     // 修改电话
-    public void doResetMoblie(String userId, String newMobile,
-            String smsCaptcha);
+    public void doResetMoblie(String userId, String newMobile, String smsCaptcha);
+
+    // 根据旧密码改新密码
+    public void editPwd(String userId, String oldPwd, String newPwd);
 
     // 分页查询
     public Paginable<SYSUser> querySYSUserPage(int start, int limit,

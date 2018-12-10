@@ -19,6 +19,7 @@ import com.xn.sdhh.common.PwdUtil;
 import com.xn.sdhh.core.OrderNoGenerater;
 import com.xn.sdhh.domain.SYSRole;
 import com.xn.sdhh.domain.SYSUser;
+import com.xn.sdhh.enums.EBizErrorCode;
 import com.xn.sdhh.enums.ESystemCode;
 import com.xn.sdhh.enums.EUser;
 import com.xn.sdhh.enums.EUserStatus;
@@ -103,8 +104,8 @@ public class SYSUserAOImpl implements ISYSUserAO {
         sysUserBO.refreshStatus(userId, userStatus, updater, remark);
         if (PhoneUtil.isMobile(mobile)) {
             // 发送短信
-            smsOutBO.sendSmsOut(mobile,
-                "尊敬的" + PhoneUtil.hideMobile(mobile) + smsContent, "805091");
+            smsOutBO.sendSmsOut(mobile, "尊敬的" + PhoneUtil.hideMobile(mobile)
+                    + smsContent, "805091");
         }
 
     }
@@ -148,18 +149,28 @@ public class SYSUserAOImpl implements ISYSUserAO {
             user.getSystemCode());
         sysUserBO.resetSelfPwd(user, newLoginPwd);
         // 发送短信
-        smsOutBO.sendSmsOut(mobile,
-            "尊敬的" + PhoneUtil.hideMobile(mobile) + "用户，您于"
+        smsOutBO.sendSmsOut(
+            mobile,
+            "尊敬的"
+                    + PhoneUtil.hideMobile(mobile)
+                    + "用户，您于"
                     + DateUtil.dateToStr(new Date(),
-                        DateUtil.DATA_TIME_PATTERN_1)
-                    + "已更改登录密码" + "，请妥善保管您的账户相关信息。",
-            "631072");
+                        DateUtil.DATA_TIME_PATTERN_1) + "已更改登录密码"
+                    + "，请妥善保管您的账户相关信息。", "631072");
+    }
+
+    @Override
+    public void editPwd(String userId, String oldPwd, String newPwd) {
+        SYSUser user = sysUserBO.getSYSUser(userId);
+        if (!user.getLoginPwd().equals(MD5Util.md5(oldPwd))) {
+            throw new BizException(EBizErrorCode.DEFAULT.getCode(), "旧密码错误");
+        }
+        sysUserBO.resetSelfPwd(user, newPwd);
     }
 
     // 更换绑定手机号
     @Override
-    public void doResetMoblie(String userId, String newMobile,
-            String smsCaptcha) {
+    public void doResetMoblie(String userId, String newMobile, String smsCaptcha) {
         SYSUser user = sysUserBO.getSYSUser(userId);
         String oldMobile = user.getMobile();
         if (newMobile.equals(oldMobile)) {
@@ -172,13 +183,14 @@ public class SYSUserAOImpl implements ISYSUserAO {
             user.getSystemCode());
         sysUserBO.resetBindMobile(user, newMobile);
         // 发送短信
-        smsOutBO.sendSmsOut(oldMobile,
-            "尊敬的" + PhoneUtil.hideMobile(oldMobile) + "用户，您于"
+        smsOutBO.sendSmsOut(
+            oldMobile,
+            "尊敬的"
+                    + PhoneUtil.hideMobile(oldMobile)
+                    + "用户，您于"
                     + DateUtil.dateToStr(new Date(),
-                        DateUtil.DATA_TIME_PATTERN_1)
-                    + "已将手机号码改为" + newMobile + "，您的登录名更改为" + newMobile
-                    + "，请妥善保管您的账户相关信息。",
-            "631072");
+                        DateUtil.DATA_TIME_PATTERN_1) + "已将手机号码改为" + newMobile
+                    + "，您的登录名更改为" + newMobile + "，请妥善保管您的账户相关信息。", "631072");
 
     }
 
@@ -189,8 +201,8 @@ public class SYSUserAOImpl implements ISYSUserAO {
 
         if (condition.getCreateDatetimeStart() != null
                 && condition.getCreateDatetimeEnd() != null
-                && condition.getCreateDatetimeStart()
-                    .after(condition.getCreateDatetimeEnd())) {
+                && condition.getCreateDatetimeStart().after(
+                    condition.getCreateDatetimeEnd())) {
             throw new BizException("xn00000", "开始时间不能大于结束时间");
         }
 
