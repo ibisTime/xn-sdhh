@@ -95,6 +95,9 @@ public class Business extends ABaseDO {
     // 保证金贷款额
     private Long bzjdke;
 
+    // 业务风险保证金
+    private Long ywfxbzj;
+
     // 毛利润
     private Long mlr;
 
@@ -401,6 +404,14 @@ public class Business extends ABaseDO {
 
     public void setBzjdke(Long bzjdke) {
         this.bzjdke = bzjdke;
+    }
+
+    public Long getYwfxbzj() {
+        return ywfxbzj;
+    }
+
+    public void setYwfxbzj(Long ywfxbzj) {
+        this.ywfxbzj = ywfxbzj;
     }
 
     public Long getMlr() {

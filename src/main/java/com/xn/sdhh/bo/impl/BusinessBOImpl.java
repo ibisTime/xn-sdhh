@@ -28,8 +28,8 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
 
     @Override
     public String saveBusiness(XN301220Req req, Long dzlx, Long fdje, Long pgf,
-            Long bzjdke, Integer fbhrc, Integer fkrc, Integer dyrc,
-            Integer djrc, double zhll, Long ysfdje) {
+            Long bzjdke, Long ywfxbzj, Integer fbhrc, Integer fkrc,
+            Integer dyrc, Integer djrc, double zhll, Long ysfdje) {
         String code = OrderNoGenerater
             .generate(EGeneratePrefix.BUSINESS.getCode());
         Business data = new Business();
@@ -92,6 +92,7 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
 
         data.setFdje(fdje);
         data.setBzjdke(bzjdke);
+        data.setYwfxbzj(ywfxbzj);
         data.setYsfdje(ysfdje);
         // 毛利润=应收返点金额-渠道费-绩效+其他利
         data.setMlr(
@@ -125,8 +126,9 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
 
     @Override
     public void refreshBusiness(Business data, XN301220Req req, Long dzlx,
-            Long fdje, Long pgf, Long bzjdke, Integer fbhrc, Integer fkrc,
-            Integer dyrc, Integer djrc, double zhll, Long ysfdje) {
+            Long fdje, Long pgf, Long bzjdke, Long ywfxbzj, Integer fbhrc,
+            Integer fkrc, Integer dyrc, Integer djrc, double zhll,
+            Long ysfdje) {
         data.setQyfzrmc(req.getQyfzrmc());
         data.setQczl(req.getQczl());
         data.setKhmc(req.getKhmc());
@@ -188,6 +190,7 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
 
         data.setFdje(fdje);
         data.setBzjdke(bzjdke);
+        data.setYwfxbzj(ywfxbzj);
         data.setYsfdje(ysfdje);
         // 毛利润=应收返点金额-渠道费-绩效+其他利
         data.setMlr(

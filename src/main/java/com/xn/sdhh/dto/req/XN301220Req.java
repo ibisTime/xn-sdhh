@@ -44,8 +44,8 @@ public class XN301220Req {
     // 其他利润
     private String qtlr;
 
-    // 保证金贷款额
-    private String bzjdke;
+    // 业务风险保证金
+    private String ywfxbzj;
 
     // 银行放款日期
     private String yhfkrq;
@@ -114,12 +114,12 @@ public class XN301220Req {
         this.qczl = qczl;
     }
 
-    public String getBzjdke() {
-        return bzjdke;
+    public String getYwfxbzj() {
+        return ywfxbzj;
     }
 
-    public void setBzjdke(String bzjdke) {
-        this.bzjdke = bzjdke;
+    public void setYwfxbzj(String ywfxbzj) {
+        this.ywfxbzj = ywfxbzj;
     }
 
     public String getKhmc() {

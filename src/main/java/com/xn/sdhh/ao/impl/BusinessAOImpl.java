@@ -78,10 +78,11 @@ public class BusinessAOImpl implements IBusinessAO {
 
         Map<String, String> map = sysConfigBO
             .getConfigsMap(ESysConfigType.COST.getCode());
+        Long gpsDjFee = 0L;
         if (StringUtils.isNotBlank(req.getDkje())) {
             double zhll = StringValidater.toDouble(req.getZhll());
             // GPS打件费用
-            Long gpsDjFee = AmountUtil.mul(1000L, StringValidater
+            gpsDjFee = AmountUtil.mul(1000L, StringValidater
                 .toDouble(map.get(SysConstant.GPSDJ_FEE)).doubleValue());
             fdje = (long) (AmountUtil.div(AmountUtil.mul(dkje, (zhll - 0.118)),
                 1.1107) - AmountUtil.mul(dkje, 0.01) - gpsDjFee);
@@ -160,18 +161,24 @@ public class BusinessAOImpl implements IBusinessAO {
         }
 
         double zhll = StringValidater.toDouble(req.getZhll());
-        // 应收返点金额=((综合利率-11.07%)/1.1107+11.07%-11.8%）*贷款额-贷款额*1%
-        Long ysfdje = AmountUtil.mul(
-            (AmountUtil.div((zhll - 0.1107), 1.1107) + 0.1107 - 0.118), dkje)
-                - AmountUtil.mul(dkje, 0.01);
+
+        // 原： 应收返点金额=((综合利率-11.07%)/1.1107+11.07%-11.8%）*贷款额-贷款额*1%
+        // Long ysfdje = AmountUtil.mul(
+        // (AmountUtil.div((zhll - 0.1107), 1.1107) + 0.1107 - 0.118), dkje)
+        // - AmountUtil.mul(dkje, 0.01);
+
+        // 现： 应收返点金额=返点金额-评估费-垫资利息-（隐藏的GPS打件费400那个金额）
+        Long ysfdje = fdje - pgFee - dzlx - gpsDjFee;
         String code = null;
         if (data == null) {
             code = businessBO.saveBusiness(req, dzlx, fdje, pgFee,
-                StringValidater.toLong(req.getBzjdke()), fbhrc, fkrc, dyrc,
+                AmountUtil.mul(data.getDkje(), 0.01),
+                StringValidater.toLong(req.getYwfxbzj()), fbhrc, fkrc, dyrc,
                 djrc, zhll, ysfdje);
         } else {
             businessBO.refreshBusiness(data, req, dzlx, fdje, pgFee,
-                StringValidater.toLong(req.getBzjdke()), fbhrc, fkrc, dyrc,
+                AmountUtil.mul(data.getDkje(), 0.01),
+                StringValidater.toLong(req.getYwfxbzj()), fbhrc, fkrc, dyrc,
                 djrc, zhll, ysfdje);
             code = data.getCode();
         }
