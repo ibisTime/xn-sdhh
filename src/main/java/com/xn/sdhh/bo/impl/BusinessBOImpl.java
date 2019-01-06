@@ -20,8 +20,8 @@ import com.xn.sdhh.enums.EBusinessStatus;
 import com.xn.sdhh.exception.BizException;
 
 @Component
-public class BusinessBOImpl extends PaginableBOImpl<Business>
-        implements IBusinessBO {
+public class BusinessBOImpl extends PaginableBOImpl<Business> implements
+        IBusinessBO {
 
     @Autowired
     IBusinessDAO businessDAO;
@@ -30,8 +30,8 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
     public String saveBusiness(XN301220Req req, Long dzlx, Long fdje, Long pgf,
             Long bzjdke, Long ywfxbzj, Integer fbhrc, Integer fkrc,
             Integer dyrc, Integer djrc, double zhll, Long ysfdje) {
-        String code = OrderNoGenerater
-            .generate(EGeneratePrefix.BUSINESS.getCode());
+        String code = OrderNoGenerater.generate(EGeneratePrefix.BUSINESS
+            .getCode());
         Business data = new Business();
         data.setCode(code);
         data.setQyfzrmc(req.getQyfzrmc());
@@ -95,8 +95,8 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
         data.setYwfxbzj(ywfxbzj);
         data.setYsfdje(ysfdje);
         // 毛利润=应收返点金额-渠道费-绩效+其他利
-        data.setMlr(
-            data.getYsfdje() - data.getQdf() - data.getJx() + data.getQtlr());
+        data.setMlr(data.getYsfdje() - data.getQdf() - data.getJx()
+                + data.getQtlr());
         data.setStatus(EBusinessStatus.ARCHIVE_NO.getCode());
         data.setUpdater(req.getUpdater());
         data.setUpdateDatetime(new Date());
@@ -127,8 +127,7 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
     @Override
     public void refreshBusiness(Business data, XN301220Req req, Long dzlx,
             Long fdje, Long pgf, Long bzjdke, Long ywfxbzj, Integer fbhrc,
-            Integer fkrc, Integer dyrc, Integer djrc, double zhll,
-            Long ysfdje) {
+            Integer fkrc, Integer dyrc, Integer djrc, double zhll, Long ysfdje) {
         data.setQyfzrmc(req.getQyfzrmc());
         data.setQczl(req.getQczl());
         data.setKhmc(req.getKhmc());
@@ -192,9 +191,10 @@ public class BusinessBOImpl extends PaginableBOImpl<Business>
         data.setBzjdke(bzjdke);
         data.setYwfxbzj(ywfxbzj);
         data.setYsfdje(ysfdje);
-        // 毛利润=应收返点金额-渠道费-绩效+其他利
-        data.setMlr(
-            data.getYsfdje() - data.getQdf() - data.getJx() + data.getQtlr());
+        // 毛利润=应收返点金额-渠道费-绩效+其他利润
+        Long mlr = data.getYsfdje() - data.getQdf() - data.getJx()
+                + data.getQtlr();
+        data.setMlr(mlr);
 
         data.setUpdater(req.getUpdater());
         data.setUpdateDatetime(new Date());
