@@ -31,6 +31,7 @@ public class XN301235 extends AProcessor {
     public Object doBusiness() throws BizException {
         Business condition = new Business();
         condition.setQyfzrmcForQuery(req.getQyfzrmc());
+        condition.setKhmcForQuery(req.getKhmc());
         condition.setStatus(req.getStatus());
         condition.setQczl(req.getQczl());
         condition.setKhmcForQuery(req.getKhmc());

@@ -35,6 +35,7 @@
 		<result column="qtlr" property="qtlr" />
 		
 		<result column="bzjdke" property="bzjdke" />
+		<result column="ywfxbzj" property="ywfxbzj" />
 		<result column="mlr" property="mlr" />
 		<result column="status" property="status" />
 		<result column="updater" property="updater" />
@@ -53,6 +54,12 @@
 			</if>
 			<if test="qyfzrmcForQuery != null and qyfzrmcForQuery != '' ">
 				AND t.qyfzrmc like "%"#{qyfzrmcForQuery}"%"
+			</if>
+			<if test="khmc != null and khmc != '' ">
+				AND t.khmc = #{khmc}
+			</if>
+			<if test="khmcForQuery != null and khmcForQuery != '' ">
+				AND t.khmc like "%"#{khmcForQuery}"%"
 			</if>
 			<if test="qczl != null and qczl != '' ">
 				AND t.qczl = #{qczl}
@@ -124,6 +131,7 @@
 		,t.qtlr
 		
 		,t.bzjdke
+		,t.ywfxbzj
 		,t.mlr
 		,t.status
 		,t.updater
@@ -181,6 +189,7 @@
 		,qtlr
 		
 		,bzjdke
+		,ywfxbzj
 		,mlr
 		,status
 		,updater
@@ -221,6 +230,7 @@
 		,#{qtlr}
 		
 		,#{bzjdke}
+		,#{ywfxbzj}
 		,#{mlr}
 		,#{status}
 		,#{updater}
@@ -264,6 +274,7 @@
 		,qtlr=#{qtlr}
 		
 		,bzjdke=#{bzjdke}
+		,ywfxbzj=#{ywfxbzj}
 		,mlr=#{mlr}
 		,status = #{status}
 		,updater = #{updater}
