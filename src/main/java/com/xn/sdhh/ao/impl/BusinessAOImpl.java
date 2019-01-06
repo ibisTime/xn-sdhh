@@ -172,7 +172,7 @@ public class BusinessAOImpl implements IBusinessAO {
         String code = null;
         if (data == null) {
             code = businessBO.saveBusiness(req, dzlx, fdje, pgFee,
-                AmountUtil.mul(data.getDkje(), 0.01),
+                AmountUtil.mul(dkje, 0.01),
                 StringValidater.toLong(req.getYwfxbzj()), fbhrc, fkrc, dyrc,
                 djrc, zhll, ysfdje);
         } else {
